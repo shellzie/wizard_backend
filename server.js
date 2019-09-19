@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const wizardRoutes = express.Router();
 const PORT = 4000;
 
+let User = require('./user.model');
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -16,10 +18,10 @@ connection.once('open', function() {
   console.log("MongoDB database connection established successfully");
 });
 
-var User = mongoose.model('User', new mongoose.Schema({
-  email: String,
-  password: String
-}));
+// var User = mongoose.model('User', new mongoose.Schema({
+//   email: String,
+//   password: String
+// }));
 
 app.use('/wizard', wizardRoutes);
 
@@ -36,6 +38,4 @@ wizardRoutes.route('/user').post(function(req, res) {
     if (err) return console.log(err);
     console.log(user.email + " saved to User collection");
   });
-
-
 });
