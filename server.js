@@ -18,11 +18,6 @@ connection.once('open', function() {
   console.log("MongoDB database connection established successfully");
 });
 
-// var User = mongoose.model('User', new mongoose.Schema({
-//   email: String,
-//   password: String
-// }));
-
 app.use('/wizard', wizardRoutes);
 
 
