@@ -29,8 +29,13 @@ wizardRoutes.route('/user').post(function(req, res) {
   let user = new User(req.body);
   user.save(function(err, user) {
     if (err) return console.log(err);
-    console.log(user.email + " saved to User collection");
+    console.log(user.email + " saved to User collection with id = " + user.id);
   });
+  // res.send("{userId:" + user.id + "}" ); //this format works too
+  res.body = {
+    "userId": user.id
+  };
+
 });
 
 wizardRoutes.route('/user_preference').post(function(req, res) {
@@ -39,4 +44,11 @@ wizardRoutes.route('/user_preference').post(function(req, res) {
     if (err) return console.log(err);
     console.log(user_preference.id + " saved to userPreferences collection");
   });
+});
+
+
+process.on( 'SIGINT', function() {
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+  // some other closing procedures go here
+  process.exit( );
 });
