@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const wizardRoutes = express.Router();
 const PORT = 4000;
 
-let User = require('./user.model');
-let userPreference = require('./user_preference.model');
+const User = require('./user.model');
+const UserPreference = require('./userPreference.model');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,21 +29,18 @@ wizardRoutes.route('/user').post(function(req, res) {
   let user = new User(req.body);
   user.save(function(err, user) {
     if (err) return console.log(err);
-    console.log(user.email + " saved to User collection with id = " + user.id);
   });
-  // res.send("{userId:" + user.id + "}" ); //this format works too
-  res.body = {
-    "userId": user.id
-  };
+  res.send(user.id); //this format works too
 
 });
 
 wizardRoutes.route('/user_preference').post(function(req, res) {
-  let user_preference = new userPreference(req.body);
-  user_preference.save(function(err, user_preference) {
+  let userPreference = new UserPreference(req.body);
+  userPreference.save(function(err, userPreference) {
     if (err) return console.log(err);
-    console.log(user_preference.id + " saved to userPreferences collection");
   });
+  res.send(userPreference.id);
+
 });
 
 

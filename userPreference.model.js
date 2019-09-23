@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let userPreference = new Schema({
-  userId: {type: Number, index: true},
+  userId: {type: String, index: true},
   bookType: [String],
   age: [String],
   subject: [String]
@@ -13,4 +13,4 @@ let userPreference = new Schema({
 // While nice for development, it is recommended this behavior be disabled in production since index
 // creation can cause a significant performance impact.
 
-module.exports = mongoose.model('userPreference', userPreference);
+module.exports = mongoose.model('UserPreference', userPreference);
